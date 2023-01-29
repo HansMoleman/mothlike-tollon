@@ -28,9 +28,8 @@ class Card:
         # Game object attributes
         self._bgd_colour = (255, 255, 255)
         self._txt_colour = (0, 0, 0) if self._colour_val == "black" else (255, 0, 0)
-        self._dimensions = (200, 300)
-        self._face_position = (16, 16)
-        self._suit_position = (72, 148)
+        self._face_offset = (8, 8)
+        self._suit_offset = (4, 50)
         self._widget = None
 
 
@@ -52,12 +51,12 @@ class Card:
 
     ## HELPER METHODS -----#
 
-    def makeWidget(self, window, position):
-        self._widget = Widget(window, self._dimensions, position)
+    def makeWidget(self, window, dimensions, position):
+        self._widget = Widget(window, dimensions, position)
         self._widget.setColour(self._bgd_colour)
         self._widget.setTextColour(self._txt_colour)
 
-        self._widget.addText(((position[0] + self._face_position[0]), (position[1] + self._face_position[1])), self._face_value)
-        self._widget.addText(((position[0] + self._suit_position[0]), (position[1] + self._suit_position[1])), self._suit_value)
+        self._widget.addText(((position[0] + self._face_offset[0]), (position[1] + self._face_offset[1])), self._face_value)
+        self._widget.addText(((position[0] + self._suit_offset[0]), (position[1] + self._suit_offset[1])), self._suit_value)
 
         return self._widget

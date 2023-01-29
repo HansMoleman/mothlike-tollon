@@ -22,6 +22,7 @@ import pygame as pyg
 
 # GAME CONSTS -----#
 BGD_COLOUR = (96, 96, 96)
+CARD_SIZE = (70, 100)
 FRAME_RATE = 32
 SCRN_WIDTH = 600
 SCRN_HEIGHT = 500
@@ -41,11 +42,10 @@ window = pyg.display.set_mode((SCRN_WIDTH, SCRN_HEIGHT))
 clock = pyg.time.Clock()
 
 # Initialize game:
-test_card = Card("7", "Clubs", "black")
-card_size = test_card.getDimensions()
-pos_x = (SCRN_WIDTH / 2) - (card_size[0] / 2)
-pos_y = (SCRN_HEIGHT / 2) - (card_size[1] / 2)
-test_card_widget = test_card.makeWidget(window, (pos_x, pos_y))
+test_card = Card("3", "Diamonds", "red")
+pos_x = (SCRN_WIDTH / 2) - (CARD_SIZE[0] / 2)
+pos_y = (SCRN_HEIGHT / 2) - (CARD_SIZE[1] / 2)
+test_card_widget = test_card.makeWidget(window, CARD_SIZE, (pos_x, pos_y))
 
 
 # Game Loop:
