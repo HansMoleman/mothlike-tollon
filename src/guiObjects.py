@@ -68,6 +68,12 @@ class Widget:
     def setColour(self, newcolour):
         self._colour = newcolour
         self._surface.fill(self._colour)
+    
+    def setTextColour(self, newcolour):
+        self._font_colour = newcolour
+
+        for pos, text in self._text.items():
+            self._text_surf[pos] = self._font.render(self._text[pos], True, self._font_colour)
 
 
     ## HELPERS METHODS -----#

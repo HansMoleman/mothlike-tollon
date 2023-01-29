@@ -14,6 +14,7 @@
 # ---
 ##
 
+from card import Card
 from guiObjects import Widget, Panel
 import pygame as pyg
 
@@ -40,30 +41,12 @@ window = pyg.display.set_mode((SCRN_WIDTH, SCRN_HEIGHT))
 clock = pyg.time.Clock()
 
 # Initialize game:
-panel_x = (SCRN_WIDTH / 2) - 112
-panel_y = (SCRN_HEIGHT / 2) - 62
-test_panel = Panel(window, (224, 124), (panel_x, panel_y))
+test_card = Card("7", "Clubs", "black")
+card_size = test_card.getDimensions()
+pos_x = (SCRN_WIDTH / 2) - (card_size[0] / 2)
+pos_y = (SCRN_HEIGHT / 2) - (card_size[1] / 2)
+test_card_widget = test_card.makeWidget(window, (pos_x, pos_y))
 
-border_size = 8
-btn_width = 100
-btn_height = 50
-
-btn1_x = panel_x + border_size
-btn1_y = panel_y + border_size
-btn1 = Widget(window, (btn_width, btn_height), (btn1_x, btn1_y))
-btn1.setColour((255, 0, 0))
-txt_a = ((btn1_x + border_size), (btn1_y + border_size))
-txt_b = (((btn1_x + btn_width) - border_size), (btn1_y + border_size))
-txt_c = ((btn1_x + border_size), ((btn1_y + btn_height) - border_size))
-txt_d = (((btn1_x + btn_width) - border_size), ((btn1_y + btn_height) - border_size))
-txt_lbl = ((btn1_x + (btn_width / 2)), (btn1_y + (btn_height / 2)))
-btn1.addText(txt_a, "A")
-btn1.addText(txt_b, "B")
-btn1.addText(txt_c, "C")
-btn1.addText(txt_d, "D")
-btn1.addText(txt_lbl, "Text Test")
-
-test_panel.addWidget(btn1)
 
 # Game Loop:
 run = True
@@ -78,7 +61,7 @@ while run:
 
     # Do game updates:
     window.fill(BGD_COLOUR)
-    test_panel.draw()
+    test_card_widget.draw()
     pyg.display.update()
     clock.tick(FRAME_RATE)
 
