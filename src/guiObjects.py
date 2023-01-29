@@ -42,14 +42,13 @@ class Widget:
         # Font
         self._font_colour = (255, 255, 255)
         self._font_name = "ubuntumono"
-        self._font_size = 14
+        self._font_size = 16
         self._font = pyg.font.SysFont(self._font_name, self._font_size)
 
         # Text
-        self._text = ""
-        self._text_surf = None
-        self._text_rect = None
-        self.editText(self._text)
+        self._text = {}
+        self._text_surf = {}
+        self._text_rect = {}
 
 
     ## GETTERS & SETTERS -----#
@@ -66,10 +65,6 @@ class Widget:
     def getRect(self):
         return (self._rect)
 
-    def getText(self):
-        return self._text
-
-
     def setColour(self, newcolour):
         self._colour = newcolour
         self._surface.fill(self._colour)
@@ -77,19 +72,24 @@ class Widget:
 
     ## HELPERS METHODS -----#
 
+    def addText(self, position, text):
+        self._text[position] = text
+        self._text_surf[position] = self._font.render(self._text[position], True, self._font_colour)
+        self._text_rect[position] = self._text_surf[position].get_rect()
+
+        self._text_rect[position].topleft = (position[0], position[1])
+        
+
     def draw(self):
         self._root_win.blit(self._surface, self._rect)
-        self._root_win.blit(self._text_surf, self._text_rect)
+
+        for pos, text in self._text.items():
+            self._root_win.blit(self._text_surf[pos], self._text_rect[pos])
 
 
-    def editText(self, newtext):
-        self._text = newtext
-        self._text_surf = self._font.render(self._text, True, self._font_colour)
-        self._text_rect = self._text_surf.get_rect()
-
-        text_x = self._position.x + (self._dimensions.x / 2)
-        text_y = self._position.y + (self._dimensions.y / 2)
-        self._text_rect.center = (text_x, text_y)
+    def editText(self, postarg, newtext):
+        self._text[postarg] = newtext
+        self._text_surf[postarg] = self._font.render(self._text[postarg], True, self._font_colour)
 
 
     def isWithinRect(self, apoint):

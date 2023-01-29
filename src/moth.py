@@ -52,7 +52,16 @@ btn1_x = panel_x + border_size
 btn1_y = panel_y + border_size
 btn1 = Widget(window, (btn_width, btn_height), (btn1_x, btn1_y))
 btn1.setColour((255, 0, 0))
-btn1.editText("Button 1")
+txt_a = ((btn1_x + border_size), (btn1_y + border_size))
+txt_b = (((btn1_x + btn_width) - border_size), (btn1_y + border_size))
+txt_c = ((btn1_x + border_size), ((btn1_y + btn_height) - border_size))
+txt_d = (((btn1_x + btn_width) - border_size), ((btn1_y + btn_height) - border_size))
+txt_lbl = ((btn1_x + (btn_width / 2)), (btn1_y + (btn_height / 2)))
+btn1.addText(txt_a, "A")
+btn1.addText(txt_b, "B")
+btn1.addText(txt_c, "C")
+btn1.addText(txt_d, "D")
+btn1.addText(txt_lbl, "Text Test")
 
 test_panel.addWidget(btn1)
 
