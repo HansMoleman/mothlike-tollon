@@ -49,6 +49,8 @@ deck_x = SCRN_WIDTH - 16 - CARD_SIZE[0]
 deck_y = (SCRN_HEIGHT / 2) - (CARD_SIZE[1] / 2)
 cards.makeWidget(window, CARD_SIZE, (deck_x, deck_y))
 
+table = []
+
 # Game Loop:
 run = True
 
@@ -58,11 +60,16 @@ while run:
             run = False
 
         if event.type == pyg.MOUSEBUTTONUP:
-            pass
+            if cards.getWidget().isWithinRect(pyg.mouse.get_pos()):
+                card = cards.drawTop()
+                card.makeWidget(window, CARD_SIZE, (deck_x, deck_y))
+                table.append(card)
 
     # Do game updates:
     window.fill(BGD_COLOUR)
     cards.getWidget().draw()
+    for card in table:
+        card.getWidget().draw()
     pyg.display.update()
     clock.tick(FRAME_RATE)
 

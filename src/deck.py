@@ -13,6 +13,7 @@
 ##
 
 
+from card import Card
 from guiObjects import Widget
 import random
 
@@ -31,6 +32,11 @@ class Deck:
         self._lbl_offset = (20, 40)
         self._widget = None
 
+        # For testing
+        self._deck.append(Card("10", "Clubs", "black"))
+        self._deck.append(Card("King", "Diamonds", "red"))
+        self._size += 2
+
 
     ## GETTERS & SETTERS -----#
 
@@ -45,7 +51,8 @@ class Deck:
         pass
 
     def drawTop(self):
-        pass
+        self._size -= 1
+        return self._deck.pop()
 
     def makeWidget(self, window, dimensions, position):
         self._widget = Widget(window, dimensions, position)

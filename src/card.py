@@ -46,6 +46,9 @@ class Card:
     
     def getSuit(self):
         return self._suit_value
+    
+    def getWidget(self):
+        return self._widget
 
 
 
