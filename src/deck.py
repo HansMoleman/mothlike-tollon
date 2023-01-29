@@ -13,6 +13,7 @@
 ##
 
 
+from guiObjects import Widget
 import random
 
 
@@ -23,8 +24,18 @@ class Deck:
         self._deck = []
         self._size = 0
 
+        # Widget attributes
+        self._bgd_colour = (0, 0, 255)
+        self._txt_colour = (255, 255, 255)
+        self._label = "Deck"
+        self._lbl_offset = (20, 40)
+        self._widget = None
+
 
     ## GETTERS & SETTERS -----#
+
+    def getWidget(self):
+        return self._widget
 
 
 
@@ -35,6 +46,15 @@ class Deck:
 
     def drawTop(self):
         pass
+
+    def makeWidget(self, window, dimensions, position):
+        self._widget = Widget(window, dimensions, position)
+        self._widget.setColour(self._bgd_colour)
+        self._widget.setTextColour(self._txt_colour)
+
+        self._widget.addText(((position[0] + self._lbl_offset[0]), (position[1] + self._lbl_offset[1])), self._label)
+        return self._widget
+
 
     def shuffle(self):
         pass
